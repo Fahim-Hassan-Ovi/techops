@@ -31,21 +31,25 @@ const Header = () => {
             <FaMoon />
           </Button>
           <Link to='/sign-in'>
-            <Button className='bg-linear-to-r from-purple-500 to-blue-500'>Sign In</Button>
+            <Button className="relative rounded-lg p-0.5 bg-linear-to-r from-purple-500 to-blue-500">
+              <span className="block bg-white rounded-md px-5 py-2 text-purple-600 font-semibold">
+                Sign In
+              </span>
+            </Button>
           </Link>
           <NavbarToggle />
         </div>
-          <NavbarCollapse>
-            <NavbarLink active={path === "/"} as={'div'}>
-              <Link to='/'>Home</Link>
-            </NavbarLink>
-            <NavbarLink active={path === "/about"} as={'div'}>
-              <Link to='/about'>About</Link>
-            </NavbarLink>
-            <NavbarLink active={path === "/projects"} as={'div'}>
-              <Link to='/projects'>Projects</Link>
-            </NavbarLink>
-          </NavbarCollapse>
+        <NavbarCollapse>
+          <NavbarLink active={path === "/"} as={'div'}>
+            <Link to='/'>Home</Link>
+          </NavbarLink>
+          <NavbarLink active={path === "/about"} as={'div'}>
+            <Link to='/about'>About</Link>
+          </NavbarLink>
+          <NavbarLink active={path === "/projects"} as={'div'}>
+            <Link to='/projects'>Projects</Link>
+          </NavbarLink>
+        </NavbarCollapse>
       </Navbar>
 
 
