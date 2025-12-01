@@ -53,6 +53,7 @@ export const signin = async (req, res, next) => {
         next(error);
     }
 }
+
 export const google = async (req, res, next) => {
     const { name, email, googlePhotoUrl } = req.body;
     try {
@@ -80,6 +81,7 @@ export const google = async (req, res, next) => {
                 password: hashedPassword,
                 profilePicture: googlePhotoUrl,
             });
+
             await newUser.save();
             const token = jwt.sign(
                 { id: newUser._id, isAdmin: newUser.isAdmin },
@@ -90,6 +92,6 @@ export const google = async (req, res, next) => {
             res.status(200).cookie('access_token', token, cookieOptions).json(rest);
         }
     } catch (error) {
-
+        next(error)
     }
 }
