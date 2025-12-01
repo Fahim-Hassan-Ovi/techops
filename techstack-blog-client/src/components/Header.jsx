@@ -1,16 +1,18 @@
 import { Avatar, Button, Dropdown, DropdownDivider, DropdownHeader, DropdownItem, Navbar, NavbarCollapse, NavbarLink, NavbarToggle, TextInput } from 'flowbite-react'
-import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { AiOutlineSearch } from "react-icons/ai";
-import { FaMoon } from "react-icons/fa";
-import { useSelector } from 'react-redux';
+import { FaMoon, FaSun } from "react-icons/fa";
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleTheme } from '../redux/theme/themeSlice.js'
 
 const Header = () => {
   const path = useLocation().pathname;
+  const dispatch = useDispatch();
+  const { theme } = useSelector((state) => state.theme);
   const { currentUser } = useSelector(state => state.user);
   return (
     <>
-      <Navbar className='border-b-2 border-gray-200 '>
+      <Navbar className='border-b-2 border-gray-200'>
         <Link to="/" className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'>
           <span className='px-2 py-1 bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500  rounded-lg text-white'>TechStack</span>
           Blog
@@ -29,8 +31,15 @@ const Header = () => {
           </span>
         </Button>
         <div className='flex gap-2 md:order-2'>
-          <Button className='w-12 h-10 hidden sm:inline' pill color='alternative'>
-            <FaMoon />
+          <Button
+            pill
+            color="alternative"
+            onClick={() => dispatch(toggleTheme())}
+            className="w-12 h-10 hidden sm:inline !p-0 flex justify-center items-center"
+          >
+            <span className="flex justify-center items-center w-full h-full">
+              {theme === "light" ? <FaSun size={16} /> : <FaMoon size={16} />}
+            </span>
           </Button>
           {currentUser ? (
             <Dropdown color={'alternative'} arrowIcon={false} className='hover:cursor-pointer' inline label={
